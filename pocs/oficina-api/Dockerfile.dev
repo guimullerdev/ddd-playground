@@ -1,0 +1,15 @@
+FROM node:24.13.1-alpine
+
+WORKDIR /app
+
+RUN corepack enable && corepack prepare yarn@stable --activate
+
+COPY package.json yarn.lock ./
+
+RUN yarn install --clean
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["yarn", "start:dev"]
